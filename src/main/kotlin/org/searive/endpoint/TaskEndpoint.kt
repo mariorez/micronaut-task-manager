@@ -35,7 +35,7 @@ class TaskEndpoint : TaskServiceCoroutineImplBase() {
             allBuilder.addTasks(
                 TaskProto
                     .newBuilder()
-                    .setId(i)
+                    .setId(i.toLong())
                     .setTitle("Unary $i")
                     .setStatus(TODO)
                     .build()
@@ -58,7 +58,7 @@ class TaskEndpoint : TaskServiceCoroutineImplBase() {
                     .addTasks(
                         TaskProto
                             .newBuilder()
-                            .setId(i)
+                            .setId(i.toLong())
                             .setTitle("Stream $i")
                             .setStatus(TODO)
                             .build()

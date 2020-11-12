@@ -24,7 +24,6 @@ micronaut {
 }
 
 dependencies {
-    kapt("io.micronaut.data:micronaut-data-processor")
     implementation("io.micronaut:micronaut-validation")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
@@ -34,7 +33,8 @@ dependencies {
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut.grpc:micronaut-grpc-runtime")
     implementation("io.micronaut.sql:micronaut-jdbc-hikari")
-    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+    implementation("io.micronaut.flyway:micronaut-flyway")
+    implementation("io.micronaut.sql:micronaut-vertx-pg-client")
     implementation("javax.annotation:javax.annotation-api")
 
     runtimeOnly("ch.qos.logback:logback-classic")
@@ -42,8 +42,6 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
 
     testImplementation("io.micronaut:micronaut-http-client")
-    testImplementation(platform("org.testcontainers:testcontainers-bom:1.14.3"))
-    testRuntimeOnly("org.testcontainers:postgresql")
 }
 
 mainClassName = "org.searive.ApplicationKt"

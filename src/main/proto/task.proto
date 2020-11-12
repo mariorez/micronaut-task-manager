@@ -27,12 +27,12 @@ message CreateTaskRequest {
 }
 
 message UpdateTaskRequest {
-  uint32 id = 1;
+  uint64 id = 1;
   string title = 2;
 }
 
 message TaskIdRequest {
-  uint32 id = 1;
+  uint64 id = 1;
 }
 
 message FindAllRequest {
@@ -53,7 +53,7 @@ message DeleteMultipleTasksResponse {
 }
 
 message TaskProto {
-  uint32 id = 1;
+  uint64 id = 1;
   string title = 2;
   Status status = 3;
   enum Status {
