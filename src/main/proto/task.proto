@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package org.seariver.proto;
+
+option java_multiple_files = true;
+
+service TaskService {
+  rpc Create (CreateTaskRequest) returns (TaskProto) {}
+
+  rpc Update (UpdateTaskRequest) returns (TaskProto) {}
+
+  rpc Delete (TaskIdRequest) returns (TaskProto) {}
+
+  rpc Done (TaskIdRequest) returns (TaskProto) {}
+
+  rpc FindAll (FindAllRequest) returns (TaskAllResponse) {}
+
+  rpc FindAllStream (FindAllRequest) returns (stream TaskAllResponse) {}
+
+  rpc FindById (TaskIdRequest) returns (TaskProto) {}
+
+  rpc DeleteMultipleTasks (DeleteMultipleTasksRequest) returns (DeleteMultipleTasksResponse) {}
+}
+
+message CreateTaskRequest {
+  string title = 1;
+}
+
+message UpdateTaskRequest {
+  uint32 id = 1;
+  string title = 2;
+}
+
+message TaskIdRequest {
+  uint32 id = 1;
+}
+
+message FindAllRequest {
+}
+
+message TaskAllResponse {
+  repeated TaskProto task = 1;
+}
+
+message DeleteMultipleTasksRequest {
+  repeated TaskIdRequest taskId = 1;
+}
+
+message DeleteMultipleTasksResponse {
+  repeated TaskProto task = 1;
+}
+
+message TaskProto {
+  uint32 id = 1;
+  string title = 2;
+  Status status = 3;
+  enum Status {
+    UNKNOWN_STATUS = 0;
+    TODO = 1;
+    DONE = 2;
+  }
+}
