@@ -36,10 +36,12 @@ message TaskIdRequest {
 }
 
 message FindAllRequest {
+  uint32 page = 1;
+  uint32 page_size = 2;
 }
 
 message TaskAllResponse {
-  repeated TaskProto task = 1;
+  repeated TaskProto tasks = 1;
 }
 
 message DeleteMultipleTasksRequest {

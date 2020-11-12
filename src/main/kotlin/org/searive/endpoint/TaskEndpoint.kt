@@ -1,5 +1,8 @@
 package org.searive.endpoint
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import org.seariver.proto.CreateTaskRequest
 import org.seariver.proto.FindAllRequest
 import org.seariver.proto.TaskAllResponse
@@ -28,16 +31,40 @@ class TaskEndpoint : TaskServiceCoroutineImplBase() {
 
         val allBuilder = TaskAllResponse.newBuilder()
 
-        for (i in 1..10) {
-            allBuilder.addTask(
+        for (i in 1..request.pageSize) {
+            allBuilder.addTasks(
                 TaskProto
                     .newBuilder()
-                    .setTitle("Task Manager $i")
+                    .setId(i)
+                    .setTitle("Unary $i")
                     .setStatus(TODO)
                     .build()
             )
         }
 
         return allBuilder.build()
+    }
+
+    override fun findAllStream(request: FindAllRequest): Flow<TaskAllResponse> = flow {
+
+        LOG.info("Start findAll $request")
+
+        val responseBuilder = TaskAllResponse.newBuilder()
+
+        for (i in 1..request.pageSize) {
+            delay(1000)
+            emit(
+                responseBuilder
+                    .addTasks(
+                        TaskProto
+                            .newBuilder()
+                            .setId(i)
+                            .setTitle("Stream $i")
+                            .setStatus(TODO)
+                            .build()
+                    )
+                    .build()
+            )
+        }
     }
 }
